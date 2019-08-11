@@ -1,0 +1,18 @@
+{
+	"function_not_implemented": "Funkce není implementována",
+	"file_not_found": "Soubor nenalezen",
+	"listing_filed": "Výpis souborů selhal",
+	"moving_failed": "Přesun selhal",
+	"renaming_failed": "Přejmenování selhalo",
+	"copying_failed": "Kopírování selhalo",
+	"removing_failed": "Odstraňování selhalo",
+	"removing_failed_directory_not_empty": "Odstaňování selhalo, složka není prázdná",
+	"saving_failed": "Ukládání selhalo",
+	"folder_already_exists": "Složka již existuje",
+	"folder_creation_failed": "Nezdařilo se vytvořit složku",
+	"permissions_change_failed": "Změna oprávnění selhala",
+	"compression_failed": "Komprimace selhala",
+	"archive_opening_failed": "Otevření archivu selhalo",
+	"extraction_failed": "Extrakce selhala",
+	"upload_failed": "Nahrávání selhalo"
+}

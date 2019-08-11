@@ -1,0 +1,2 @@
+php_value post_max_size 48M
+php_value upload_max_filesize 24M

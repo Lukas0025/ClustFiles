@@ -1,0 +1,45 @@
+body {
+	margin: 0;
+	font-family: sans-serif;
+	color: #72777a;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.loginbar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: white;
+	height: calc(100% - 60px);
+	padding: 30px;
+}
+
+h3 {
+	font-size: 25px;
+	font-weight: 100;
+}
+
+input {
+	display: block;
+	margin: 10px 0;
+	padding: 8px;
+	width: 300px;
+	border: 1px solid #72777a;
+	color: #72777a;
+	border-radius: 6px;
+}
+
+button {
+	background: #2196f3;
+	border: none;
+	border-radius: 6px;
+	padding: 10px;
+	color: white;
+	float: right;
+}
