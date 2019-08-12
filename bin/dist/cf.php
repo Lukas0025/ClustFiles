@@ -87,6 +87,27 @@ class clusterFiles {
         return $return;
     }
 
+    public function delToken($tokenname) {
+        $tokens = $this->getTokens();
+        $return = false;
+        
+        foreach ($tokens['tokens'] as $id => $token) {
+            unset($tokens['tokens'][$id]);
+            $return = true;
+            break;
+        }
+
+        $this->saveToFile('/data/tokens', $tokens);
+
+        return $return;
+    }
+
+    public function logout() {
+        $this->delToken($_COOKIE['token']);
+        unset($_COOKIE['token']); 
+        setcookie('token', null, -1); 
+    }
+
     public function login($name, $pass) {
         $user = $this->getUser($name);
 

@@ -11,9 +11,13 @@
     //try login
     if ($cf->login($_POST["name"], $_POST["pass"])) {
       header('Location: index.php');
+      die;
     }
 
     $message = "login failed";
+
+  } else if (isset($_GET["logout"])) {
+    $cf->logout();
   }
   
   $template->create([
