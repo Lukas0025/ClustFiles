@@ -11,6 +11,12 @@ class clusterFiles {
         return (substr($haystack, 0, $length) === $needle);
     }
 
+    public function getRandomBackground() {
+        $files = glob('/var/www/data/img/backgrounds/*.*');
+        $file = array_rand($files);
+        return "img/backgrounds/" . basename($files[$file]);
+    }
+
     public function savePath($relativePath) {
         /*if (!$this->startsWith(
                 realpath($relativePath),

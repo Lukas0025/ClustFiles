@@ -10,13 +10,14 @@
   if (isset($_POST["name"])) {
     //try login
     if ($cf->login($_POST["name"], $_POST["pass"])) {
-        header('Location: index.php');
+      header('Location: index.php');
     }
 
-    $message = "login failed :(";
+    $message = "login failed";
   }
   
   $template->create([
-      'message' => $message
+      'message' => $message,
+      'image' => $cf->getRandomBackground()
   ]);
 ?>
