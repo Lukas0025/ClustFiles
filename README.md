@@ -11,6 +11,21 @@ OR
 
 * one docker machine
 
+## build it and run it
+
+```sh
+docker build . -t clustfiles
+# run on localhost:8080
+docker run -d -p 8080:80 clustfiles
+```
+
+default user:
+
+```
+username: admin
+password: admin
+```
+
 ## todo list
 :black_square_button: Admin site
 
