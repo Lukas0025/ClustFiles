@@ -1,0 +1,40 @@
+{
+  "name": "ClustFiles",
+  "version": "1.0.0",
+  "description": "file cloud for docker swarm",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lukas0025/ClustFiles.git"
+  },
+  "keywords": [
+    "filemanager"
+  ],
+  "author": "Lukas Plevac",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/Lukas0025/ClustFiles/issues"
+  },
+  "homepage": "https://github.com/Lukas0025/ClustFiles/#readme",
+  "devDependencies": {
+    "angular-translate": "~2.15.1",
+    "bootstrap": "~3.3.2",
+    "bootswatch": "~3.3.7",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.2.7",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^2.1.0",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "~3.1.1",
+    "ng-file-upload": "^12.0.1",
+    "yarn": "^1.3.2"
+  },
+  "dependencies": {
+    "angular": "^1.6.7"
+  }
+}
