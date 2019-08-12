@@ -8,11 +8,11 @@
 * cluster runned on docker swarm
 
 ## todo list
-[ ] Admin site
-[ ] add logout button
-[ ] file sharing - future
-[ ] fix compression
-[ ] fix savePath function
-[ ] update styles (chage color skin)
-[ ] login screen image randomisation
-[ ] for easy setup create own NFS server
+* Admin site
+* add logout button
+* file sharing - future
+* fix compression
+* fix savePath function
+* update styles (chage color skin)
+* login screen image randomisation
+* for easy setup create own NFS server
