@@ -29,7 +29,7 @@ password: admin
 ## todo list
 :black_square_button: Admin site
 
-:black_square_button: add logout button
+:ballot_box_with_check: add logout button
 
 :black_square_button: fix compression
 
