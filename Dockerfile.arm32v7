@@ -7,7 +7,6 @@ ADD bin/. /tobuild
 RUN apt-get update && apt-get install -y curl tar git nodejs && \
     curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static . && /
     #lets build frontend
-    #install npm
     curl -L https://npmjs.org/install.sh | sh && \
     #copy node_modules to lib
     cp -r /tobuild/node_modules/ /tobuild/lib/ && \
