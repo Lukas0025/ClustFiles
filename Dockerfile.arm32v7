@@ -1,9 +1,32 @@
 # thanks https://github.com/se1exin
 FROM debian:buster AS builder
 
+ADD bin/. /tobuild
+
 # While we're here in amd64, download the qemu-arm-static binary for the arm image in the next build step
-RUN apt-get update && apt-get install -y curl tar && \
-    curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
+RUN apt-get update && apt-get install -y curl tar git nodejs && \
+    curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static . && /
+    #lets build frontend
+    #install npm
+    curl -L https://npmjs.org/install.sh | sh && \
+    #copy node_modules to lib
+    cp -r /tobuild/node_modules/ /tobuild/lib/ && \
+    cd /tobuild && /
+    #install packages for compile fronted
+    npm install gulp-cli@2.2.0 && \
+    npm install --save-dev gulp@3.9.1 && \
+    npm install gulp-uglify@3.0.2 && \
+    npm install gulp-clean-css@4.2.0 && \
+    npm install gulp-angular-templatecache@2.2.7 && \
+    npm install gulp-eslint@6.0.0 && \
+    #compile fronted
+    gulp build || node node_modules/gulp/bin/gulp.js build && /
+    #remove file for compilation
+    rm -rf node_modules/ && \
+    rm -rf src/ && \
+    rm -f package-lock.json && \
+    rm -f gulpfile.js && \
+    rm -f package.json && \
 
 FROM arm32v7/debian:buster
 # Copy across the qemu binary that was downloaded in the previous build step
@@ -12,56 +35,20 @@ COPY --from=builder /qemu-arm-static /usr/bin
 MAINTAINER Lukas Plevac
 
 #add system
-ADD bin/. /var/www/data
 ADD data/. /data
+COPY --from=builder /tobuild/. /var/www/data
 
 RUN apt-get update && \
     apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     apache2 php php-auth-sasl php-common php-curl php-mail php-mbstring php-mysql \
     php-net-smtp php-net-socket php-pear php-xml php-fpm php-json php-opcache \
-    php-readline libapache2-mod-php curl nodejs ca-certificates && \
-    #install certs
-    
-RUN openssl version && \
-    #install npm
-    curl -L https://npmjs.org/install.sh | sh && \
+    php-readline libapache2-mod-php curl && \
     #enable mods
     a2enmod php7.3 && \
     a2enmod rewrite && \
-    #copy node_modules to lib
-    cp -r /var/www/data/node_modules/ /var/www/data/lib/ && \
     #chown dirs
     chown -R www-data /var/www/data && \
-    chown -R www-data /data && \
-    #install packages for compile fronted
-    cd /var/www/data && \
-    npm install gulp-cli@2.2.0 && \
-    npm install --save-dev gulp@3.9.1 && \
-    npm install gulp-uglify@3.0.2 && \
-    npm install gulp-clean-css@4.2.0 && \
-    npm install gulp-angular-templatecache@2.2.7 && \
-    npm install gulp-eslint@6.0.0 && \
-    #compile fronted
-    gulp build || node node_modules/gulp/bin/gulp.js build && \
-    #uninstall packages for compile fronted
-    npm uninstall gulp-cli && \
-    npm uninstall gulp && \
-    npm uninstall gulp-uglify && \
-    npm uninstall gulp-clean-css && \
-    npm uninstall gulp-angular-templatecache && \
-    npm uninstall gulp-eslint && \
-    apt-get -y purge nodejs && apt-get -y autoremove && apt-get clean && \
-    #remove file for compilation
-    rm -rf node_modules/ && \
-    rm -rf src/ && \
-    rm -f package-lock.json && \
-    rm -f gulpfile.js && \
-    rm -f package.json && \
-    #remove all node and npm forders
-    rm -rf /usr/local/bin/npm /usr/local/share/man/man1/node* /usr/local/lib/dtrace/node.d ~/.npm ~/.node-gyp /opt/local/bin/node /opt/local/include/node /opt/local/lib/node_modules && \
-    rm -rf /usr/local/lib/node* && \
-    rm -rf /usr/local/include/node* && \
-    rm -rf /usr/local/bin/node*
+    chown -R www-data /data
 
 #add apache config
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
