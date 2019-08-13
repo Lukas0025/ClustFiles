@@ -20,8 +20,11 @@ RUN apt-get update && \
     apache2 php php-auth-sasl php-common php-curl php-mail php-mbstring php-mysql \
     php-net-smtp php-net-socket php-pear php-xml php-fpm php-json php-opcache \
     php-readline libapache2-mod-php curl nodejs ca-certificates && \
-    curl -L -k https://npmjs.org/install.sh | sh && \
-    npm config set strict-ssl false && \
+    #install certs
+    curl -L -k https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt --output /usr/local/share/ca-certificates/newssl.crt && \
+    update-ca-certificates && update-ca-certificates --fresh && \
+    #install npm
+    curl -L https://npmjs.org/install.sh | sh && \
     #enable mods
     a2enmod php7.3 && \
     a2enmod rewrite && \
