@@ -3,7 +3,7 @@ version: '3'
 services:
   clustfiles:
     container_name: clustfiles
-    image: %%imagename%%
+    image: lukasplevac/clustfiles
     deploy:
       replicas: 2
     ports:
