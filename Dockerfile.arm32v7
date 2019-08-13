@@ -21,6 +21,7 @@ RUN apt-get update && \
     php-net-smtp php-net-socket php-pear php-xml php-fpm php-json php-opcache \
     php-readline libapache2-mod-php curl nodejs ca-certificates && \
     curl -L -k https://npmjs.org/install.sh | sh && \
+    npm config set strict-ssl false && \
     #enable mods
     a2enmod php7.3 && \
     a2enmod rewrite && \
