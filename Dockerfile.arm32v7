@@ -21,7 +21,8 @@ RUN apt-get update && \
     php-net-smtp php-net-socket php-pear php-xml php-fpm php-json php-opcache \
     php-readline libapache2-mod-php curl nodejs ca-certificates && \
     #install certs
-    curl -L -k https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt --output /usr/local/share/ca-certificates/newssl.crt && \
+    
+RUN curl -L -k https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt --output /usr/local/share/ca-certificates/newssl.crt && \
     update-ca-certificates && update-ca-certificates --fresh && \
     #install npm
     curl -L https://npmjs.org/install.sh | sh && \
