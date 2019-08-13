@@ -1,0 +1,23 @@
+ 
+version: '3'
+
+services:
+  clustfiles:
+    container_name: clustfiles
+    image: lukasplevac/clustfiles:aarch64-latest
+    deploy:
+      replicas: 2
+    ports:
+      - "4000:80/tcp"
+
+    volumes:
+       - 'clustfiles:/data/'
+      
+    restart: unless-stopped
+    
+volumes:
+  clustfiles:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: "addr=%%yourNFSserverIP%%,hard,nolock,rw"
