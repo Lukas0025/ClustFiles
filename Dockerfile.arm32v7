@@ -5,7 +5,7 @@ FROM debian:buster AS builder
 RUN apt-get update && apt-get install -y curl tar && \
     curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
-FROM debian:buster
+FROM arm32v7/debian:10-slim
 # Copy across the qemu binary that was downloaded in the previous build step
 COPY --from=builder /qemu-arm-static /usr/bin
 
