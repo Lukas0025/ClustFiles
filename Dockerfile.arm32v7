@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y curl tar git nodejs && \
     npm install gulp-angular-templatecache@2.2.7 && \
     npm install gulp-eslint@6.0.0 && \
     #compile fronted
-    gulp build || node node_modules/gulp/bin/gulp.js build && /
+    gulp build || node node_modules/gulp/bin/gulp.js build && \
     #remove file for compilation
     rm -rf node_modules/ && \
     rm -rf src/ && \
