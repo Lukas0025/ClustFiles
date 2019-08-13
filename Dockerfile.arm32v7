@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y curl tar git nodejs && \
     curl -L https://npmjs.org/install.sh | sh && \
     #copy node_modules to lib
     cp -r /tobuild/node_modules/ /tobuild/lib/ && \
-    cd /tobuild && /
+    cd /tobuild && \
     #install packages for compile fronted
     npm install gulp-cli@2.2.0 && \
     npm install --save-dev gulp@3.9.1 && \
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y curl tar git nodejs && \
     rm -rf src/ && \
     rm -f package-lock.json && \
     rm -f gulpfile.js && \
-    rm -f package.json && \
+    rm -f package.json
 
 FROM arm32v7/debian:buster
 # Copy across the qemu binary that was downloaded in the previous build step
