@@ -2,7 +2,8 @@
 FROM debian:buster AS builder
 
 # While we're here in amd64, download the qemu-arm-static binary for the arm image in the next build step
-RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
+RUN apt-get update && apt-get install curl tar && \
+    curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
 FROM debian:buster
 # Copy across the qemu binary that was downloaded in the previous build step
