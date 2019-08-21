@@ -21,3 +21,5 @@ volumes:
     driver_opts:
       type: nfs
       o: "addr=%%yourNFSserverIP%%,hard,nolock,rw"
+      device: ":%%patchForClustFilesOnServer%%"
+
