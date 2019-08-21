@@ -2,8 +2,36 @@
 class clusterFiles {
     public function isUser($name) {
         return is_dir(
-            $this->savePath('/data/' . $name)
+            $this->safePath('/data/' . $name)
         );
+    }
+
+    public function isAdmin($name) {
+        if ($this->isUser($name)) {
+            return $this->getUser($name)["admin"];
+        }
+
+        return false;
+    }
+
+    public function addUser($name, $pass, $isadmin = false) {
+        if (!$this->isUser($name)) {
+            mkdir(
+                $this->safePath('/data/' . $name)
+            );
+
+            $user = [
+                'pass' => password_hash($pass, PASSWORD_DEFAULT),
+                'admin' => $isadmin
+            ];
+
+            $this->saveToFile(
+                $this->safePath('/data/' . $name . '/user'), 
+                $user
+            );
+        }
+
+        return false;
     }
 
     public function startsWith($haystack, $needle) {
@@ -17,7 +45,7 @@ class clusterFiles {
         return "img/backgrounds/" . basename($files[$file]);
     }
 
-    public function savePath($relativePath) {
+    public function safePath($relativePath) {
         /*if (!$this->startsWith(
                 realpath($relativePath),
                 '/data/'
@@ -57,7 +85,7 @@ class clusterFiles {
 
     public function getUser($name) {
         return $this->getFromFile(
-            $this->savePath('/data/' . $name . '/user')
+            $this->safePath('/data/' . $name . '/user')
         );
     }
 
@@ -66,7 +94,7 @@ class clusterFiles {
     }
 
     public function getUserPath($name) {
-        return $this->savePath('/data/' . $name . '/files');
+        return $this->safePath('/data/' . $name . '/files');
     }
 
     public function getToken($tokenname) {
