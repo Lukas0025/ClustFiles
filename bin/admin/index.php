@@ -6,9 +6,14 @@
   $cf = new clusterFiles();
   
   $user = $cf->getLoginedUser();
-  /*
-    TODO: check user is admin else die
-  */
+  if (!is_null($user)) {
+    if (!$user["admin"]) {
+      die("unauthorized access");
+    }
+  } else {
+    header('Location: /login.php');
+    die();
+  }
 
 
   $template->create([

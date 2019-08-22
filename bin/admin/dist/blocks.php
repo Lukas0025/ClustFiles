@@ -2,7 +2,7 @@
     class blocks {
 
         public function usersTable($cf, $class = "") {
-            $cf->getUsersName();
+            $usersname = $cf->getUsersNames();
 
             //create table array
             $table = [
@@ -22,7 +22,7 @@
                     $user,
                     '/data/' . $user,
                     $cf->userSize($user),
-                    $cf->isAdmin($user) ? "<center><span class='badge badge-success'>yes</span></center>" : "<center><span class='badge badge-danger'>no</span></center>",
+                    $cf->isAdmin($user) ? "<span class='badge badge-success'>yes</span>" : "<span class='badge badge-danger'>no</span>",
                     
                         "<a class='btn btn-primary btn-sm' href='#'>
                             <i class='fas fa-folder'></i>
@@ -83,7 +83,7 @@
                         <div class='card-body $bodyclass'>
                             $content
                         </div>
-                    </div>"
+                    </div>";
         }
 
     }

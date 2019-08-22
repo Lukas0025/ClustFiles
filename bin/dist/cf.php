@@ -15,15 +15,25 @@ class clusterFiles {
     }
 
     public function getUsersNames() {
-        return array_filter(glob('/data/*'), 'is_dir');
+        $paths = array_filter(glob('/data/*'), 'is_dir');
+
+        $users = [];
+        foreach ($paths as $path) {
+            array_push($users, basename($path));
+        }
+
+        return $users;
     }
 
     public function userSize($user) {
-        $dir = '/data/' . $user;
+        return $this->folderSize('/data/' . $user);
+    }
+
+    private function folderSize($dir) {
         $size = 0;
 
         foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
-            $size += is_file($each) ? filesize($each) : folderSize($each);
+            $size += is_file($each) ? filesize($each) : $this->folderSize($each);
         }
 
         return $size;
@@ -35,8 +45,12 @@ class clusterFiles {
                 $this->safePath('/data/' . $name)
             );
 
+            mkdir(
+                $this->safePath('/data/' . $name . '/files')
+            );
+
             $user = [
-                'pass' => password_hash($pass, PASSWORD_DEFAULT),
+                'hash' => password_hash($pass, PASSWORD_DEFAULT),
                 'admin' => $isadmin
             ];
 
