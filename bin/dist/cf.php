@@ -14,6 +14,21 @@ class clusterFiles {
         return false;
     }
 
+    public function getUsersNames() {
+        return array_filter(glob('/data/*'), 'is_dir');
+    }
+
+    public function userSize($user) {
+        $dir = '/data/' . $user;
+        $size = 0;
+
+        foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
+            $size += is_file($each) ? filesize($each) : folderSize($each);
+        }
+
+        return $size;
+    }
+
     public function addUser($name, $pass, $isadmin = false) {
         if (!$this->isUser($name)) {
             mkdir(
