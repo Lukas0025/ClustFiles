@@ -25,10 +25,10 @@
                     $cf->isAdmin($user) ? "<span class='badge badge-success'>yes</span>" : "<span class='badge badge-danger'>no</span>",
                     
                         "<a class='btn btn-primary btn-sm' href='#'>
-                            <i class='fas fa-folder'></i>
+                            <i class='fa fa-folder'></i>
                             View
                         </a>
-                        <a class='btn btn-info btn-sm' href='#'>
+                        <a class='btn btn-info btn-sm' href='user.php?user=$user'>
                             <i class='fa fa-pencil-alt'></i>
                             Edit
                         </a>

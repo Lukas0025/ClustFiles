@@ -39,7 +39,31 @@ class clusterFiles {
         return $size;
     }
 
-    public function addUser($name, $pass, $isadmin = false) {
+    public function updateUser($name, $pass = NULL, $isadmin = false, $addinfo = []) {
+        if ($this->isUser($name)) {
+            if (is_null($pass)) {
+                $hash = $this->getUser($name)['hash'];
+            } else {
+                $hash = password_hash($pass, PASSWORD_DEFAULT);
+            }
+
+            $user = [
+                'hash' => $hash,
+                'admin' => $isadmin
+            ];
+
+            $user = array_merge($user, $addinfo);
+
+            $this->saveToFile(
+                $this->safePath('/data/' . $name . '/user'), 
+                $user
+            );
+        }
+
+        return false;
+    }
+
+    public function addUser($name, $pass, $isadmin = false, $addinfo = []) {
         if (!$this->isUser($name)) {
             mkdir(
                 $this->safePath('/data/' . $name)
@@ -53,6 +77,8 @@ class clusterFiles {
                 'hash' => password_hash($pass, PASSWORD_DEFAULT),
                 'admin' => $isadmin
             ];
+
+            $user = array_merge($user, $addinfo);
 
             $this->saveToFile(
                 $this->safePath('/data/' . $name . '/user'), 

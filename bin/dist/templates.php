@@ -12,8 +12,8 @@ class template {
 	function __construct($name) {
     	$this->name = $name;
 	}
-	
-	public function create($data){
+
+	public function createToVar($data){
 		//Načtení html souboru
 		$templatefile = file_get_contents(dirname(__FILE__ ) . "/../templates/$this->name.html");
 		
@@ -40,7 +40,11 @@ class template {
 			$templatefile = preg_replace("/\s+|\n+|\r/", ' ', $templatefile);
 		}
 		
-		echo $templatefile;
+		return $templatefile;
+	}
+	
+	public function create($data){
+		echo $this->createToVar($data);
 	}
 }
 ?>
