@@ -15,7 +15,10 @@ $cf = new ClusterFiles();
 $user = $cf->getLoginedUser();
 
 if (!is_null($user)) {
-     $fileManagerApi = new AngularFilemanager\LocalBridge\FileManagerApi($cf->getUserPath($user['name']));
+     $fileManagerApi = new AngularFilemanager\LocalBridge\FileManagerApi(
+          $cf->getUserPath($user['name']),
+          ($user['quota'] === 0) || ($cf->userSize($user['name']) < $user['quota'])
+     );
 
      $rest = new AngularFilemanager\LocalBridge\Rest();
      $rest->post([$fileManagerApi, 'postHandler'])

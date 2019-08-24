@@ -13,13 +13,14 @@ class FileManagerApi
 
     private $translate;
 
-    public function __construct($basePath, $lang = 'en', $muteErrors = true)
+    public function __construct($basePath, $canupload = true, $lang = 'en', $muteErrors = true)
     {
         if ($muteErrors) {
             ini_set('display_errors', 0);
         }
 
         $this->basePath = $basePath;
+        $this->canUpload = $canupload;
         $this->translate = new Translate($lang);
     }
 
@@ -29,7 +30,12 @@ class FileManagerApi
         
         // Probably file upload
         if (!isset($request['action']) && (isset($_SERVER["CONTENT_TYPE"]) && strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)) {
-            $uploaded = $this->uploadAction($request['destination'], $files);
+            if ($this->canUpload) {
+                $uploaded = $this->uploadAction($request['destination'], $files);
+            } else {
+                $uploaded = false;
+            }
+
             if ($uploaded === true) {
                 $response = $this->simpleSuccessResponse();
             } else {

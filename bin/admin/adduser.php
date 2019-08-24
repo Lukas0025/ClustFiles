@@ -27,7 +27,7 @@
             isset($_POST['isadmin']),
             [
                 'fullname' => $_POST['fullname'],
-                'quota' => $_POST['quota'],
+                'quota' => intval($_POST['quota']),
                 'email' => $_POST['email']
             ]
         );
