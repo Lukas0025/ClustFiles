@@ -8,7 +8,9 @@
   $user = $cf->getLoginedUser();
 
   if (!is_null($user)) {
-    $template->create([]);
+    $template->create([
+      'isadmin' => $user["admin"] ? 'true' : 'false'
+    ]);
   } else {
     header('Location: login.php');
   }

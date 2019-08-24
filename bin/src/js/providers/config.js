@@ -32,7 +32,7 @@
                 move: true,
                 copy: true,
                 edit: true,
-                changePermissions: true,
+                changePermissions: false,
                 compress: true,
                 compressChooseName: true,
                 extract: true,
@@ -42,7 +42,8 @@
                 remove: true,
                 createFolder: true,
                 pickFiles: false,
-                pickFolders: false
+                pickFolders: false,
+                administration: false
             },
 
             multipleDownloadFileName: 'clustfiles.zip',
