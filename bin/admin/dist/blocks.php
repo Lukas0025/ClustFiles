@@ -32,7 +32,7 @@
                             <i class='fa fa-pencil-alt'></i>
                             Edit
                         </a>
-                        <a class='btn btn-danger btn-sm' href='#'>
+                        <a class='btn btn-danger btn-sm' href='users.php?delname=$user'>
                             <i class='fa fa-trash'></i>
                             Delete
                         </a>"

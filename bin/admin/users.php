@@ -18,6 +18,10 @@
         die();
     }
 
+    if (isset($_GET['delname'])) {
+        $cf->delUser($_GET['delname']);
+    }
+
     $template->create([
         "user" => $user["name"],
         "content" => $blocks->card("ClustFiles users", $blocks->usersTable($cf), "<a class='btn btn-success btn-sm' href='adduser.php'><i class='fa fa-plus'></i> Add</a>"),

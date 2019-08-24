@@ -39,6 +39,38 @@ class clusterFiles {
         return $size;
     }
 
+    private function deleteDirectory($dir) {
+        if (!file_exists($dir)) {
+            return true;
+        }
+    
+        if (!is_dir($dir)) {
+            return unlink($dir);
+        }
+    
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+    
+            if (!$this->deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+                return false;
+            }
+    
+        }
+    
+        return rmdir($dir);
+    }
+
+    public function delUser($name) {
+        if ($this->isUser($name)) {
+            return $this->deleteDirectory('/data/' . $name);
+        } else {
+            return false;
+        }
+
+    }
+
     public function updateUser($name, $pass = NULL, $isadmin = false, $addinfo = []) {
         if ($this->isUser($name)) {
             if (is_null($pass)) {
