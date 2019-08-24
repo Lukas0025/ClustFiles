@@ -1,7 +1,7 @@
 <?php
     class blocks {
 
-        public function usersTable($cf, $class = "") {
+        public function usersTable($cf, $class = "table-striped") {
             $usersname = $cf->getUsersNames();
 
             //create table array

@@ -58,6 +58,8 @@ class clusterFiles {
                 $this->safePath('/data/' . $name . '/user'), 
                 $user
             );
+
+            return true;
         }
 
         return false;
@@ -84,6 +86,8 @@ class clusterFiles {
                 $this->safePath('/data/' . $name . '/user'), 
                 $user
             );
+
+            return true;
         }
 
         return false;
