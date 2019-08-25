@@ -3,6 +3,8 @@ file cloud aplication from docker swarm clusters
 
 #### WARNING this aplication is under development and it is unstable and not-complete use ony on your own risk
 
+![preview](https://github.com/Lukas0025/ClustFiles/blob/master/preview/indir.png)
+
 ## requirements
 * NFS server
 * cluster runned on docker swarm
