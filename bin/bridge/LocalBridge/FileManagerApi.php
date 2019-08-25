@@ -301,13 +301,7 @@ class FileManagerApi
             $path = $this->basePath . $path;
 
             if (is_dir($path)) {
-                $dirEmpty = (new \FilesystemIterator($path))->valid();
-
-                if ($dirEmpty) {
-                    return 'notempty';
-                } else {
-                    $removed = rmdir($path);
-                }
+                $removed = $this->deleteDirectory($path);
             } else {
                 $removed = unlink($path);
             }
@@ -324,6 +318,29 @@ class FileManagerApi
     {
         $path = $this->basePath . $path;
         return file_put_contents($path, $content);
+    }
+
+    private function deleteDirectory($dir) {
+        if (!file_exists($dir)) {
+            return true;
+        }
+    
+        if (!is_dir($dir)) {
+            return unlink($dir);
+        }
+    
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+    
+            if (!$this->deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+                return false;
+            }
+    
+        }
+    
+        return rmdir($dir);
     }
 
     private function getContentAction($path)
