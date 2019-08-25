@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     apache2 php php-auth-sasl php-common php-curl php-mail php-mbstring php-mysql \
     php-net-smtp php-net-socket php-pear php-xml php-fpm php-json php-opcache \
-    php-readline libapache2-mod-php curl nodejs && \
+    php-readline libapache2-mod-php php-zip curl nodejs && \
     curl -L https://npmjs.org/install.sh | sh && \
     #enable mods
     a2enmod php7.3 && \
