@@ -1,9 +1,9 @@
 <?php
   include "dist/cf.php";
   include "dist/templates.php";
-	
-  $template = new template("login");
+  
   $cf = new clusterFiles();
+  $template = new template($cf->isUser("admin") ? "login" : "cradmin");
   
   $message = "";
 
@@ -18,6 +18,16 @@
 
   } else if (isset($_GET["logout"])) {
     $cf->logout();
+  } else if (isset($_POST["cradmin"])) {
+    if (!$cf->isUser("admin")) {
+      $cf->addUser("admin", $_POST["pass"], true);
+      $cf->login("admin", $_POST["pass"]);
+      
+      header('Location: index.php');
+      die;
+    }
+
+    $message = "admin is exist";
   }
   
   $template->create([
