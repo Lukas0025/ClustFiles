@@ -48,13 +48,6 @@ nano docker-compose.arm32v7
 docker stack deploy -c docker-compose.arm32v7 --resolve-image never ClustFiles
 ```
 
-## default user:
-
-```
-username: admin
-password: admin
-```
-
 ## todo list
 :ballot_box_with_check: Admin site
 
