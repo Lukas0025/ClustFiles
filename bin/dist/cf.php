@@ -2,7 +2,7 @@
 class clusterFiles {
     public function isUser($name) {
         return is_dir(
-            $this->safePath('/data/' . $name)
+            $this->safePath('/data/users/' . $name)
         );
     }
 
@@ -15,7 +15,7 @@ class clusterFiles {
     }
 
     public function getUsersNames() {
-        $paths = array_filter(glob('/data/*'), 'is_dir');
+        $paths = array_filter(glob('/data/users/*'), 'is_dir');
 
         $users = [];
         foreach ($paths as $path) {
@@ -26,7 +26,7 @@ class clusterFiles {
     }
 
     public function userSize($user) {
-        return $this->folderSize('/data/' . $user);
+        return $this->folderSize('/data/users/' . $user);
     }
 
     private function folderSize($dir) {
@@ -64,7 +64,7 @@ class clusterFiles {
 
     public function delUser($name) {
         if ($this->isUser($name)) {
-            return $this->deleteDirectory('/data/' . $name);
+            return $this->deleteDirectory('/data/users/' . $name);
         } else {
             return false;
         }
@@ -87,7 +87,7 @@ class clusterFiles {
             $user = array_merge($user, $addinfo);
 
             $this->saveToFile(
-                $this->safePath('/data/' . $name . '/user'), 
+                $this->safePath('/data/users/' . $name . '/user'), 
                 $user
             );
 
@@ -100,11 +100,11 @@ class clusterFiles {
     public function addUser($name, $pass, $isadmin = false, $addinfo = []) {
         if (!$this->isUser($name)) {
             mkdir(
-                $this->safePath('/data/' . $name)
+                $this->safePath('/data/users/' . $name)
             );
 
             mkdir(
-                $this->safePath('/data/' . $name . '/files')
+                $this->safePath('/data/users/' . $name . '/files')
             );
 
             $user = [
@@ -115,7 +115,7 @@ class clusterFiles {
             $user = array_merge($user, $addinfo);
 
             $this->saveToFile(
-                $this->safePath('/data/' . $name . '/user'), 
+                $this->safePath('/data/users/' . $name . '/user'), 
                 $user
             );
 
@@ -176,7 +176,7 @@ class clusterFiles {
 
     public function getUser($name) {
         return $this->getFromFile(
-            $this->safePath('/data/' . $name . '/user')
+            $this->safePath('/data/users/' . $name . '/user')
         );
     }
 
@@ -185,7 +185,7 @@ class clusterFiles {
     }
 
     public function getUserPath($name) {
-        return $this->safePath('/data/' . $name . '/files');
+        return $this->safePath('/data/users/' . $name . '/files');
     }
 
     public function getToken($tokenname) {
