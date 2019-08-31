@@ -25,6 +25,10 @@ class clusterFiles {
         return $users;
     }
 
+    public function noUsers() {
+        return count($this->getUsersNames()) == 0;
+    }
+
     public function userSize($user) {
         return $this->folderSize('/data/users/' . $user);
     }

@@ -3,7 +3,7 @@
   include "dist/templates.php";
   
   $cf = new clusterFiles();
-  $template = new template($cf->isUser("admin") ? "login" : "cradmin");
+  $template = new template(!$cf->noUsers() ? "login" : "cradmin");
   
   $message = "";
 
@@ -19,7 +19,7 @@
   } else if (isset($_GET["logout"])) {
     $cf->logout();
   } else if (isset($_POST["cradmin"])) {
-    if (!$cf->isUser("admin")) {
+    if ($cf->noUsers()) {
       $cf->addUser("admin", $_POST["pass"], true);
       $cf->login("admin", $_POST["pass"]);
       
