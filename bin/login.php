@@ -24,7 +24,7 @@
                 'quota' => 0
       ]);
       
-      $cf->login("admin", $_POST["pass"]);
+      $cf->login($_POST["cradmin"], $_POST["pass"]);
       
       header('Location: index.php');
       die;
