@@ -1,66 +1,28 @@
-# ClustFiles
-file cloud aplication from docker swarm clusters
+[![ClustFiles](https://i.ibb.co/7SwbXbf/147984394-147985426.png)](https://hub.docker.com/r/lukasplevac/clustfiles)
 
-docker hub images - https://hub.docker.com/r/lukasplevac/clustfiles
+[![Docker Build](https://img.shields.io/docker/cloud/automated/lukasplevac/clustfiles)](https://hub.docker.com/r/lukasplevac/clustfiles)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lukasplevac/clustfiles)](https://hub.docker.com/r/lukasplevac/clustfiles "Pulls")
+[![Image size](https://images.microbadger.com/badges/image/lukasplevac/clustfiles:aarch64-latest.svg)](https://microbadger.com/images/lukasplevac/clustfiles:aarch64-latest "Image size")
 
-#### WARNING this aplication is under development and it is unstable and not-complete use ony on your own risk
+ClustFIles is file cloud aplication (like NextCloud or Seafile) from docker swarm clusters on amd64 (normal PC) or arm (raspberry pi) platform. This aplication is beginer friendly and it is deployed with one command.
+The goal is to provide a fully scalable application that can run on more than one node. It is using NFS server as storage for yout data. This NFS server is setup automated with compose file, but if you want your own NFS server or something like GlusterFS you can, connect it over NFS or conect it on every node to dir and use this dir as value.
 
-![preview](https://github.com/Lukas0025/ClustFiles/blob/master/preview/indir.png)
+## Getting started
 
-## requirements
-* NFS server
-* cluster runned on docker swarm
+* [Deploy ClustFiles](https://github.com/Lukas0025/ClustFiles/wiki/Deploy)
+* [wiki](https://github.com/Lukas0025/ClustFiles/wiki)
 
-OR
+## Getting help
 
-* one docker machine
+**NOTE**: You can find something in wiki
 
-## Run it on single machine
+* Issues: https://github.com/Lukas0025/ClustFiles/issues
 
-```sh
-# run on localhost:8080
-docker run -d -p 8080:80 lukasplevac/clustfiles
-```
-#### aarch64 (raspberry pi)
+## Reporting bugs and contributing
 
-```sh
-# run on localhost:8080
-docker run -d -p 8080:80 lukasplevac/clustfiles:aarch64-latest
-```
+* Want to report a bug or request a feature? Please open [an issue](https://github.com/Lukas0025/ClustFiles/issues/new).
+* Want to help us with build? Contact me
 
-## Run it on swarm
+## Licensing
 
-```sh
-git clone https://github.com/Lukas0025/ClustFiles.git
-cd ClustFiles/
-# now edit docker-compose.yml (NFS config)
-nano docker-compose.yml
-# deploy it
-docker stack deploy -c docker-compose.yml ClustFiles
-```
-
-#### aarch64 (raspberry pi)
-
-```sh
-git clone https://github.com/Lukas0025/ClustFiles.git
-cd ClustFiles/
-# now edit docker-compose.arm32v7 (NFS config)
-nano docker-compose.arm32v7
-# deploy it
-docker stack deploy -c docker-compose.arm32v7 --resolve-image never ClustFiles
-```
-
-## todo list
-:ballot_box_with_check: Admin site
-
-:ballot_box_with_check: add logout button
-
-:ballot_box_with_check: fix compression
-
-:black_square_button: fix safePath function
-
-:black_square_button: update styles (chage color skin)
-
-:ballot_box_with_check: login screen image randomisation
-
-:black_square_button: for easy setup create own NFS server
+ClustFiles consists of several parts that are licensed under different licenses. These licenses can be found in the /license folder. Newly written files, especially the ClustFiles kernel, are licensed under Apache2
