@@ -10,7 +10,7 @@ The goal is to provide a fully scalable application that can run on more than on
 ## Getting started
 
 * [Deploy ClustFiles]()
-* [wiki]()
+* [wiki](https://github.com/Lukas0025/ClustFiles/wiki)
 
 ## Getting help
 
