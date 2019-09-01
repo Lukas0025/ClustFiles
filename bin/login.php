@@ -20,7 +20,10 @@
     $cf->logout();
   } else if (isset($_POST["cradmin"])) {
     if ($cf->noUsers()) {
-      $cf->addUser("admin", $_POST["pass"], true);
+      $cf->addUser("admin", $_POST["pass"], true, [
+                'quota' => 0
+      ]);
+      
       $cf->login("admin", $_POST["pass"]);
       
       header('Location: index.php');
